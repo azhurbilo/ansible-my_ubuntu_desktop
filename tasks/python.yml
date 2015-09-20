@@ -28,19 +28,21 @@
 - name: add workon_home var
   sudo_user: '{{ home_user }}'
   lineinfile:
-    dest: '~/.profile'
+    dest: '~/.bashrc'
     line: 'export WORKON_HOME={{ python_virtualenv_root }}'
 
 - name: add virtualenvwrapper source
   sudo_user: '{{ home_user }}'
   lineinfile:
-    dest: '~/.profile'
+    dest: '~/.bashrc'
     insertafter: 'WORKON_HOME'
     line: 'source /usr/local/bin/virtualenvwrapper.sh '
 
 - name: create the virtualenv
   sudo_user: '{{ home_user }}'
-  shell: 'source ~/.profile && mkvirtualenv firstenv'
+  shell: 'source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv firstenv'
+  environment:
+    WORKON_HOME: '{{ python_virtualenv_root }}'
   args:
     executable: /bin/bash
     creates: '~/{{ python_virtualenv_root }}/firstenv'
