@@ -14,3 +14,14 @@
     name: 'virtualbox-4.3'
     update_cache: yes
     state: present
+
+
+- name: download virtualbox ext pack
+  get_url:
+    url: 'http://download.virtualbox.org/virtualbox/4.3.30/Oracle_VM_VirtualBox_Extension_Pack-4.3.30-101610.vbox-extpack'
+    dest: '/tmp/Oracle_VM_VirtualBox_Extension_Pack-4.3.30-101610.vbox-extpack'
+  register: vb_ext_result
+
+- name: install virtualbox ext pack
+  shell: 'sudo VBoxManage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack-4.3.30-101610.vbox-extpack'
+  when: vb_ext_result.changed

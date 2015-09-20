@@ -1,16 +1,20 @@
 ---
 
-- name: add Docker key
-  apt_key:
-    id: '2C52609D'
-    url: 'http://get.docker.com/gpg'
-    validate_certs: no
+#- name: add Docker key
+#  apt_key:
+#    id: '2C52609D'
+#    url: 'http://get.docker.com/gpg'
+#    validate_certs: no
+#
+#
+#- name: Add Docker repository
+#  apt_repository:
+#    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
 
-
-- name: Add Docker repository
-  apt_repository:
-    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
-
+- name: run docker script
+  shell: 'curl -sSL https://get.docker.com/ | sh'
+  args:
+    creates: '/etc/default/docker'
 
 - name: install latest docker package
   apt:
