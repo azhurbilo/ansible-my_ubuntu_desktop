@@ -22,7 +22,3 @@
 - name: add ssh config
   sudo_user: '{{ home_user }}'
   template: src=ssh/config dest=~/.ssh/config
-
-- name: add ssh config
-  sudo_user: '{{ home_user }}'
-  template: src=ssh/config dest=~/.ssh/config

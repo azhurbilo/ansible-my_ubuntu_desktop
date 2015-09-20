@@ -37,10 +37,10 @@
 
 - name: install ruby
   sudo_user: '{{ home_user }}'
-  shell: 'source ~/.profile && rbenv install -v 2.2.2 -s && rbenv rehash'
+  shell: 'source ~/.profile && rbenv install -v {{ ruby_version }} -s && rbenv global {{ ruby_version }} && rbenv rehash'
   args:
     executable: /bin/bash
-    creates: '~/.rbenv/versions/2.2.2/'
+    creates: '~/.rbenv/versions/{{ ruby_version }}'
 
 - name: disable ruby documentation
   sudo_user: '{{ home_user }}'

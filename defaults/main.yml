@@ -7,8 +7,10 @@
 #  --log-level=debug
 docker_opts: ""
 
-docker_group_members: []
-
 home_user: 'artem'
 
+docker_group_members: ['{{ home_user }}']
+
 python_virtualenv_root: 'python_envs'
+
+ruby_version: '2.2.2'

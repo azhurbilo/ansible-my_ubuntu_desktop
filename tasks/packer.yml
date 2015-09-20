@@ -7,9 +7,9 @@
     mode: 0755
 
 - name: add packer to system path
-  lineinfile:
-    dest: '/etc/bash.bashrc'
-    line: 'export PATH=/opt/packer:$PATH'
+  copy:
+    dest: '/etc/profile.d/packer.sh'
+    content: 'export PATH=/opt/packer:$PATH'
 
 - name: download packer deb
   get_url:
