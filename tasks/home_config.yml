@@ -1,0 +1,28 @@
+---
+
+- name: add user
+  user:
+   name: '{{ home_user }}'
+
+- name: uncomment color for terminal
+  sudo_user: '{{ home_user }}'
+  replace:
+    dest: '~/.bashrc'
+    regexp: '^#force_color_prompt=yes$'
+    replace: 'force_color_prompt=yes'
+    backup: yes
+
+- name: create ssh dir
+  sudo_user: '{{ home_user }}'
+  file:
+    path: '~/.ssh'
+    state: directory
+    mode: 755
+
+- name: add ssh config
+  sudo_user: '{{ home_user }}'
+  template: src=ssh/config dest=~/.ssh/config
+
+- name: add ssh config
+  sudo_user: '{{ home_user }}'
+  template: src=ssh/config dest=~/.ssh/config

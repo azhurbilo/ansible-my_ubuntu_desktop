@@ -1,2 +1,12 @@
 ---
 # tasks file for ansible-my_ubuntu_desktop
+
+- include: system_config.yml
+- include: home_config.yml
+- include: base.yml
+- include: python.yml
+- include: ruby.yml
+- include: docker.yml
+- include: chrome.yml
+- include: java_oracle.yml
+

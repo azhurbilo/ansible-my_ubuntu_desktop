@@ -1,0 +1,48 @@
+---
+
+- name: install python package
+  apt: name=python state=latest
+
+- name: install pip package
+  apt: name=python-pip state=present
+
+- name: update pip
+  pip:
+    name: 'pip'
+    version: 7.1.2
+    state: present
+
+- name: install virtualenv
+  pip: name={{item}}
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
+- name: create venvs dir
+  sudo_user: '{{ home_user }}'
+  file:
+    path: '~/{{ python_virtualenv_root }}'
+    state: directory
+    mode: 0755
+
+- name: add workon_home var
+  sudo_user: '{{ home_user }}'
+  lineinfile:
+    dest: '~/.profile'
+    line: 'export WORKON_HOME={{ python_virtualenv_root }}'
+
+- name: add virtualenvwrapper source
+  sudo_user: '{{ home_user }}'
+  lineinfile:
+    dest: '~/.profile'
+    insertafter: 'WORKON_HOME'
+    line: 'source /usr/local/bin/virtualenvwrapper.sh '
+
+- name: create the virtualenv
+  sudo_user: '{{ home_user }}'
+  shell: 'source ~/.profile && mkvirtualenv firstenv'
+  args:
+    executable: /bin/bash
+    creates: '~/{{ python_virtualenv_root }}/firstenv'
+
+

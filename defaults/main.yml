@@ -1,2 +1,14 @@
 ---
 # defaults file for ansible-my_ubuntu_desktop
+
+#docker_opts: >
+#  -H unix://
+#  -H tcp://0.0.0.0:2375
+#  --log-level=debug
+docker_opts: ""
+
+docker_group_members: []
+
+home_user: 'artem'
+
+python_virtualenv_root: 'python_envs'

@@ -1,2 +1,10 @@
 ---
 # handlers file for ansible-my_ubuntu_desktop
+
+- name: restart network-manager
+  service:
+    name: network-manager
+    state: restarted
+
+- name: packer unzip
+  shell: unzip /tmp/packer_0.8.6_linux_amd64.zip -d /opt/packer

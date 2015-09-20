@@ -1,0 +1,9 @@
+---
+
+- name: disable dnsmasq
+  replace:
+    dest: '/etc/NetworkManager/NetworkManager.conf'
+    regexp: '^dns=dnsmasq$'
+    replace: '#dns=dnsmasq'
+    backup: yes
+  notify: restart network-manager

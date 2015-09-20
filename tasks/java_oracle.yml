@@ -1,0 +1,11 @@
+---
+
+- name: add oracle java repo
+  apt_repository:
+    repo: 'ppa:webupd8team/java'
+
+- name: install latest orcale java 8 package
+  apt:
+    name: 'oracle-java8-installer'
+    update_cache: yes
+    state: latest
