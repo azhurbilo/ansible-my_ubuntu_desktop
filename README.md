@@ -1,31 +1,56 @@
-Role Name
+ansible-my_ubuntu_desktop
 =========
 
-A brief description of the role goes here.
+This repo can't be used as role! :warning:
+
+It's created only to simplify bootstrapping of my Ubuntu 14.04 desktop.
+
+But if your env match with my one it might be useful.
+
+
+Tested with:
+- ansible 1.9.3
+- Ubuntu 14.04
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- [Ansible](http://docs.ansible.com/intro_installation.html)
+- [Vagrant](http://www.vagrantup.com/downloads.html)
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+defaults/main.yml
+
+- docker_opts
+- home_user
+- docker_group_members
+- python_virtualenv_root
+- ruby_version
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+none
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+File `playbook.yml` contains an example of how to use this role
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: server
+  sudo: true
+#  There you can overwrite defaults/main.yml variables
+  vars:
+#    - home_user: 'bob'
+  roles:
+    - ansible-my_ubuntu_desktop
+```
 
 License
 -------
@@ -35,4 +60,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+created by [Artem Zhurbila](http://www.linkedin.com/in/zhurbila)
