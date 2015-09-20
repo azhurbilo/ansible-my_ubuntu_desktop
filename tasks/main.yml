@@ -9,4 +9,6 @@
 - include: docker.yml
 - include: chrome.yml
 - include: java_oracle.yml
-
+- include: virtualbox.yml
+- include: vagrant.yml
+- include: packer.yml

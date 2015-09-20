@@ -1,0 +1,16 @@
+---
+
+- name: add virtualbox key
+  apt_key:
+    url: 'http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc'
+
+
+- name: add virtualbox repo
+  apt_repository:
+    repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+
+- name: install virtualbox package
+  apt:
+    name: 'virtualbox-4.3'
+    update_cache: yes
+    state: present

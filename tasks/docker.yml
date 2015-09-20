@@ -1,0 +1,46 @@
+---
+
+- name: add Docker key
+  apt_key:
+    id: '2C52609D'
+    url: 'http://get.docker.com/gpg'
+    validate_certs: no
+
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
+
+
+- name: install latest docker package
+  apt:
+    name: 'docker-engine'
+    update_cache: yes
+    state: latest
+
+
+- name: set docker daemon options
+  copy:
+    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
+    dest: /etc/default/docker
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Reload docker
+  when: docker_opts != ""
+
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+
+
+- name: add users to the docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: docker_group_members
+  when: docker_group_members is defined
