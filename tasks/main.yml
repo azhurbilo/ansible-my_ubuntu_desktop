@@ -8,6 +8,7 @@
 - include: ruby.yml
 - include: docker.yml
 - include: chrome.yml
+- include: sublime.yml
 - include: java_oracle.yml
 - include: virtualbox.yml
 - include: vagrant.yml

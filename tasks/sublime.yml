@@ -1,0 +1,10 @@
+---
+
+- name: add sublime repo
+  apt_repository:
+    repo: 'ppa:webupd8team/sublime-text-3'
+
+- name: install sublime
+  apt:
+    name: 'sublime-text-installer'
+    update_cache: yes
