@@ -1,0 +1,9 @@
+---
+
+- hosts: server
+  sudo: true
+  vars:
+    - test_var: '123'
+#    - git_private_key: "{{ lookup('file', '~/.ssh/github') }}"
+  roles:
+    - ansible-my_ubuntu_desktop
