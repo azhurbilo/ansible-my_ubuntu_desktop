@@ -8,3 +8,6 @@
 
 - name: packer unzip
   shell: unzip /tmp/packer_0.8.6_linux_amd64.zip -d /opt/packer
+
+- name: terraform unzip
+  shell: unzip /tmp/terraform_0.7.4_linux_amd64.zip -d /opt/terraform
