@@ -37,15 +37,17 @@
     - htop
     - iotop
     - iftop
+    - traceroute
     - vim
     - tmux
     - skype
-    - clementine
-    - remmina
-    - vlc
-    - wireshark
-    - wavemon
-    - inkscape
-    - gimp
-    - xdot
-    - kazam
+    - clementine # music player
+    - remmina # RDP
+    - vlc # video player
+    - wireshark # network sniffer
+    - wavemon # wi-fi signal monitoring
+    - inkscape # graphic editor
+    - gimp # graphic editor
+    - xdot # graph viewer
+    - kazam # screencast
+    - shutter # editor
