@@ -6,6 +6,7 @@
     name: network-manager
     state: restarted
 
+# TODO replace it by 'unarchive' module
 - name: packer unzip
   shell: unzip /tmp/packer_0.8.6_linux_amd64.zip -d /opt/packer
 

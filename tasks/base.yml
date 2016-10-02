@@ -16,9 +16,10 @@
   apt_key:
     url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
 
-- name: add chrome repo
-  apt_repository:
-    repo: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+# TODO 404 not found
+#- name: add chrome repo
+#  apt_repository:
+#    repo: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
 
 - name: update apt-get
   apt: update_cache=yes
@@ -71,3 +72,45 @@
     - xdot # graph viewer
     - kazam # screencast
     - shutter # editor
+
+
+# install redis desktop manager
+#------------------------------
+
+- name: download redis manager deb
+  get_url:
+    url: 'https://github.com/uglide/RedisDesktopManager/releases/download/0.8.3/redis-desktop-manager_0.8.3-120_amd64.deb'
+    dest: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+
+- name: install redis manager package
+  apt:
+    deb: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+    state: present
+
+
+# install robomongo
+#------------------------------
+
+- name: create dir for robomongo binaries
+  file:
+    path: '/opt/robomongo'
+    state: directory
+    mode: 0755
+
+- name: add robomongo to system path
+  copy:
+    dest: '/etc/profile.d/robomongo.sh'
+    content: 'export PATH=/opt/robomongo/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/:$PATH'
+
+- name: download robomongo zip
+  get_url:
+    url: 'https://download.robomongo.org/0.9.0-rc10/linux/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz'
+    dest: '/tmp/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz'
+
+- name: "unzip robomongo"
+  unarchive:
+    src: "/tmp/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz"
+    dest: "/opt/robomongo"
+    copy: no
+
+
