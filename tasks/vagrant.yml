@@ -2,13 +2,13 @@
 
 - name: download vagrant deb
   get_url:
-    url: 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb'
-    dest: '/tmp/vagrant_1.7.4_x86_64.deb'
-    sha256sum: 'dcd2c2b5d7ae2183d82b8b363979901474ba8d2006410576ada89d7fa7668336'
+    url: 'https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6_x86_64.deb'
+    dest: '/tmp/vagrant_1.8.6_x86_64.deb'
+    sha256sum: 'e6d83b6b43ad16475cb5cfcabe7dc798002147c1d048a7b6178032084c7070da'
 
 - name: install vagrant package
   apt:
-    deb: '/tmp/vagrant_1.7.4_x86_64.deb'
+    deb: '/tmp/vagrant_1.8.6_x86_64.deb'
     state: present
 
 

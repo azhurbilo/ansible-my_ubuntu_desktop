@@ -1,8 +1,12 @@
 ---
 
-- name: add canonical partners repo
+- name: 'add canonical partners repo'
   apt_repository:
     repo: 'deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner'
+
+- name: 'add Cool Reader repo'
+  apt_repository:
+    repo: 'ppa:vovansrnd/coolreader'
 
 - name: update apt-get
   apt: update_cache=yes
@@ -29,18 +33,20 @@
     - wget
     - python-software-properties
     - bash
-
-- name: install applications
-  apt: name={{item}} state=present
-  with_items:
-    - git
     - htop
     - iotop
     - iftop
     - traceroute
     - vim
     - tmux
+
+- name: install applications
+  apt: name={{item}} state=present
+  with_items:
+    - git
     - skype
+    - filezilla
+    - fbreader # text reader
     - clementine # music player
     - remmina # RDP
     - vlc # video player

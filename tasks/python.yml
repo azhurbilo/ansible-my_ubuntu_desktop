@@ -9,7 +9,7 @@
 - name: update pip
   pip:
     name: 'pip'
-    version: 7.1.2
+    version: 8.1.2
     state: present
 
 - name: install virtualenv

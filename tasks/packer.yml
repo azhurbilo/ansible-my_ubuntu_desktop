@@ -13,8 +13,8 @@
 
 - name: download packer deb
   get_url:
-    url: 'https://dl.bintray.com/mitchellh/packer/packer_0.8.6_linux_amd64.zip'
-    dest: '/tmp/packer_0.8.6_linux_amd64.zip'
-    sha256sum: '2f1ca794e51de831ace30792ab0886aca516bf6b407f6027e816ba7ca79703b5'
+    url: 'https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip'
+    dest: '/tmp/packer_0.10.2_linux_amd64.zip'
+    sha256sum: '86c78bae6bd09afb4ddb86915cb71a22fb81ea79578bbf65de3ef48c842d9b2b'
   notify: packer unzip
 
