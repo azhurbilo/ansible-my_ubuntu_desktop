@@ -1,0 +1,62 @@
+---
+
+#===========
+# PACKER
+#===========
+
+- name: create dir for packer binaries
+  file:
+    path: '/opt/packer'
+    state: directory
+    mode: 0755
+
+- name: add packer to system path
+  copy:
+    dest: '/etc/profile.d/packer.sh'
+    content: 'export PATH=/opt/packer:$PATH'
+
+- name: download packer zip
+  get_url:
+    url: 'https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip'
+    dest: '/tmp/packer_0.10.2_linux_amd64.zip'
+    sha256sum: '86c78bae6bd09afb4ddb86915cb71a22fb81ea79578bbf65de3ef48c842d9b2b'
+  notify: packer unzip
+
+
+#===========
+# TERRAFORM
+#===========
+
+- name: create dir for terraform binaries
+  file:
+    path: '/opt/terraform'
+    state: directory
+    mode: 0755
+
+- name: add terraform to system path
+  copy:
+    dest: '/etc/profile.d/terraform.sh'
+    content: 'export PATH=/opt/terraform:$PATH'
+
+- name: download terraform zip
+  get_url:
+    url: 'https://releases.hashicorp.com/terraform/0.7.4/terraform_0.7.4_linux_amd64.zip'
+    dest: '/tmp/terraform_0.7.4_linux_amd64.zip'
+    sha256sum: '8950ab77430d0ec04dc315f0d2d0433421221357b112d44aa33ed53cbf5838f6'
+  notify: terraform unzip
+
+
+#===========
+# VAGRANT
+#===========
+
+- name: download vagrant deb
+  get_url:
+    url: 'https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6_x86_64.deb'
+    dest: '/tmp/vagrant_1.8.6_x86_64.deb'
+    sha256sum: 'e6d83b6b43ad16475cb5cfcabe7dc798002147c1d048a7b6178032084c7070da'
+
+- name: install vagrant package
+  apt:
+    deb: '/tmp/vagrant_1.8.6_x86_64.deb'
+    state: present
