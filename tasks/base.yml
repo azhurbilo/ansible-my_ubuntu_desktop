@@ -8,6 +8,10 @@
   apt_repository:
     repo: 'ppa:vovansrnd/coolreader'
 
+- name: add sublime repo
+  apt_repository:
+    repo: 'ppa:webupd8team/sublime-text-3'
+
 - name: update apt-get
   apt: update_cache=yes
 
@@ -46,6 +50,7 @@
     - git
     - skype
     - filezilla
+    - sublime-text-installer
     - fbreader # text reader
     - clementine # music player
     - remmina # RDP

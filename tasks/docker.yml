@@ -1,5 +1,7 @@
 ---
 
+# https://github.com/angstwad/docker.ubuntu/blob/master/tasks/main.yml
+
 #- name: add Docker key
 #  apt_key:
 #    id: '2C52609D'
@@ -22,17 +24,18 @@
     update_cache: yes
     state: latest
 
-
-- name: set docker daemon options
-  copy:
-    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
-    dest: /etc/default/docker
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - Reload docker
-  when: docker_opts != ""
+# check what file generated with systemd
+#
+#- name: set docker daemon options
+#  copy:
+#    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
+#    dest: /etc/default/docker
+#    owner: root
+#    group: root
+#    mode: 0644
+#  notify:
+#    - Reload docker
+#  when: docker_opts != ""
 
 
 - name: start docker service
