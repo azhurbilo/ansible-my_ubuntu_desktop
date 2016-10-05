@@ -12,6 +12,10 @@
   apt_repository:
     repo: 'ppa:webupd8team/sublime-text-3'
 
+- name: add asciinema repo
+  apt_repository:
+    repo: 'ppa:zanchey/asciinema'
+
 - name: add chrome key
   apt_key:
     url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
@@ -72,6 +76,7 @@
     - xdot # graph viewer
     - kazam # screencast
     - shutter # editor
+    - asciinema # terminal recorder
 
 
 # install redis desktop manager
@@ -129,4 +134,13 @@
     dest: "/opt/robomongo"
     copy: no
 
+
+# add default template file in file manager
+
+- name: "add libreoffice template"
+  copy:
+    src: "files/ubuntu_file_templates/Empty Document.odt"
+    dest: "/home/artem/Templates/Empty Document.odt"
+    owner: "{{ home_user }}"
+    group: "{{ home_user }}"
 

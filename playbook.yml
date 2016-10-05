@@ -1,7 +1,8 @@
 ---
 
 - hosts: server
-  sudo: true
+  become: true
+  become_user: root
 #  There you can overwrite defaults/main.yml variables
   vars:
 #    - home_user: 'bob'
