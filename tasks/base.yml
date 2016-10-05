@@ -16,10 +16,10 @@
   apt_repository:
     repo: 'ppa:zanchey/asciinema'
 
-- name: add chrome key
-  apt_key:
-    url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
-
+#- name: add chrome key
+#  apt_key:
+#    url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
+#
 # TODO 404 not found
 #- name: add chrome repo
 #  apt_repository:
@@ -62,7 +62,7 @@
   with_items:
     - git
     - skype
-    - google-chrome-stable
+#    - google-chrome-stable
     - filezilla
     - sublime-text-installer
     - fbreader # text reader
@@ -90,6 +90,20 @@
 - name: install redis manager package
   apt:
     deb: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+    state: present
+
+
+# install chrome
+#------------------------------
+
+- name: download chrome deb
+  get_url:
+    url: 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+    dest: '/tmp/google-chrome-stable_current_amd64.deb'
+
+- name: install chrome
+  apt:
+    deb: '/tmp/google-chrome-stable_current_amd64.deb'
     state: present
 
 
