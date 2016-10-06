@@ -6,7 +6,9 @@
 - name: install pip package
   apt: name=python-pip state=present
 
+# work: pip install --upgrade pip
 - name: update pip
+  sudo_user: '{{ home_user }}'
   pip:
     name: 'pip'
     version: 8.1.2

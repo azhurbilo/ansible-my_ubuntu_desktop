@@ -4,9 +4,11 @@
   apt_repository:
     repo: 'deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner'
 
-- name: 'add Cool Reader repo'
-  apt_repository:
-    repo: 'ppa:vovansrnd/coolreader'
+# commented - no repo for 16.04
+#
+#- name: 'add Cool Reader repo'
+#  apt_repository:
+#    repo: 'ppa:vovansrnd/coolreader'
 
 - name: add sublime repo
   apt_repository:
@@ -15,6 +17,15 @@
 - name: add asciinema repo
   apt_repository:
     repo: 'ppa:zanchey/asciinema'
+
+- name: add spotify key
+  apt_key:
+    keyserver: 'hkp://keyserver.ubuntu.com:80'
+    id: 'BBEBDCB318AD50EC6865090613B00F1FD2C19886'
+
+- name: add spotify repo
+  apt_repository:
+    repo: 'deb http://repository.spotify.com stable non-free'
 
 #- name: add chrome key
 #  apt_key:
@@ -65,6 +76,7 @@
 #    - google-chrome-stable
     - filezilla
     - sublime-text-installer
+    - xpad # sticky notes
     - fbreader # text reader
     - clementine # music player
     - remmina # RDP
@@ -77,20 +89,23 @@
     - kazam # screencast
     - shutter # editor
     - asciinema # terminal recorder
+    - spotify-client
 
 
 # install redis desktop manager
 #------------------------------
 
-- name: download redis manager deb
-  get_url:
-    url: 'https://github.com/uglide/RedisDesktopManager/releases/download/0.8.3/redis-desktop-manager_0.8.3-120_amd64.deb'
-    dest: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
-
-- name: install redis manager package
-  apt:
-    deb: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
-    state: present
+# "Dependency is not satisfiable: libicu52\n"} Fixed in 0.9
+#
+#- name: download redis manager deb
+#  get_url:
+#    url: 'https://github.com/uglide/RedisDesktopManager/releases/download/0.8.3/redis-desktop-manager_0.8.3-120_amd64.deb'
+#    dest: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+#
+#- name: install redis manager package
+#  apt:
+#    deb: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+#    state: present
 
 
 # install chrome
