@@ -1,2 +1,5 @@
 Host *
     StrictHostKeyChecking no
+
+Host github.com github
+    IdentityFile "~/.ssh/github"

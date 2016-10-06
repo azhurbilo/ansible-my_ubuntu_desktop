@@ -1,20 +1,20 @@
 ---
 
 - name: download rbenv
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   git:
     repo: 'https://github.com/sstephenson/rbenv.git'
     dest: '~/.rbenv'
     update: no
 
 - name: add path to rbenv dir
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   lineinfile:
     dest: '~/.profile'
     line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
 
 - name: add rbenv eval
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   lineinfile:
     dest: '~/.profile'
     insertafter: '.rbenv/bin'
@@ -22,28 +22,28 @@
 
 
 - name: download ruby build
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   git:
     repo: 'https://github.com/sstephenson/ruby-build.git'
     dest: '~/.rbenv/plugins/ruby-build'
     update: no
 
 - name: add rbenv eval
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   lineinfile:
     dest: '~/.profile'
     insertafter: 'rbenv init'
     line: 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"'
 
 - name: install ruby
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   shell: 'source ~/.profile && rbenv install -v {{ ruby_version }} -s && rbenv global {{ ruby_version }} && rbenv rehash'
   args:
     executable: /bin/bash
     creates: '~/.rbenv/versions/{{ ruby_version }}'
 
 - name: disable ruby documentation
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   copy:
     dest: '~/.gemrc'
     content: 'gem: --no-document'

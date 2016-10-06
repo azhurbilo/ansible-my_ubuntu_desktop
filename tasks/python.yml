@@ -8,7 +8,7 @@
 
 # work: pip install --upgrade pip
 - name: update pip
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   pip:
     name: 'pip'
     version: 8.1.2
@@ -21,27 +21,27 @@
     - virtualenvwrapper
 
 - name: create venvs dir
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   file:
     path: '~/{{ python_virtualenv_root }}'
     state: directory
     mode: 0755
 
 - name: add workon_home var
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   lineinfile:
     dest: '~/.bashrc'
     line: 'export WORKON_HOME={{ python_virtualenv_root }}'
 
 - name: add virtualenvwrapper source
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   lineinfile:
     dest: '~/.bashrc'
     insertafter: 'WORKON_HOME'
     line: 'source /usr/local/bin/virtualenvwrapper.sh '
 
 - name: create the virtualenv
-  sudo_user: '{{ home_user }}'
+  become_user: '{{ home_user }}'
   shell: 'source /usr/local/bin/virtualenvwrapper.sh && mkvirtualenv firstenv'
   environment:
     WORKON_HOME: '{{ python_virtualenv_root }}'

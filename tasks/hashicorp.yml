@@ -20,8 +20,11 @@
     url: 'https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip'
     dest: '/tmp/packer_0.10.2_linux_amd64.zip'
     sha256sum: '86c78bae6bd09afb4ddb86915cb71a22fb81ea79578bbf65de3ef48c842d9b2b'
-  notify: packer unzip
 
+- name: packer unzip
+  unarchive:
+    src: /tmp/packer_0.10.2_linux_amd64.zip-d
+    dest: /opt/packer
 
 #===========
 # TERRAFORM
@@ -43,8 +46,11 @@
     url: 'https://releases.hashicorp.com/terraform/0.7.4/terraform_0.7.4_linux_amd64.zip'
     dest: '/tmp/terraform_0.7.4_linux_amd64.zip'
     sha256sum: '8950ab77430d0ec04dc315f0d2d0433421221357b112d44aa33ed53cbf5838f6'
-  notify: terraform unzip
 
+- name: packer terraform
+  unarchive:
+    src: /tmp/terraform_0.7.4_linux_amd64.zip
+    dest: /opt/terraform
 
 #===========
 # VAGRANT
