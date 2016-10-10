@@ -18,12 +18,12 @@
 - name: download packer zip
   get_url:
     url: 'https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip'
-    dest: '/tmp/packer_0.10.2_linux_amd64.zip'
+    dest: '/root/apps/packer_0.10.2_linux_amd64.zip'
     sha256sum: '86c78bae6bd09afb4ddb86915cb71a22fb81ea79578bbf65de3ef48c842d9b2b'
 
 - name: packer unzip
   unarchive:
-    src: /tmp/packer_0.10.2_linux_amd64.zip-d
+    src: /root/apps/packer_0.10.2_linux_amd64.zip
     dest: /opt/packer
 
 #===========
@@ -44,12 +44,12 @@
 - name: download terraform zip
   get_url:
     url: 'https://releases.hashicorp.com/terraform/0.7.4/terraform_0.7.4_linux_amd64.zip'
-    dest: '/tmp/terraform_0.7.4_linux_amd64.zip'
+    dest: '/root/apps/terraform_0.7.4_linux_amd64.zip'
     sha256sum: '8950ab77430d0ec04dc315f0d2d0433421221357b112d44aa33ed53cbf5838f6'
 
-- name: packer terraform
+- name: unzip terraform
   unarchive:
-    src: /tmp/terraform_0.7.4_linux_amd64.zip
+    src: /root/apps/terraform_0.7.4_linux_amd64.zip
     dest: /opt/terraform
 
 #===========
@@ -59,10 +59,19 @@
 - name: download vagrant deb
   get_url:
     url: 'https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6_x86_64.deb'
-    dest: '/tmp/vagrant_1.8.6_x86_64.deb'
+    dest: '/root/apps/vagrant_1.8.6_x86_64.deb'
     sha256sum: 'e6d83b6b43ad16475cb5cfcabe7dc798002147c1d048a7b6178032084c7070da'
 
 - name: install vagrant package
   apt:
-    deb: '/tmp/vagrant_1.8.6_x86_64.deb'
+    deb: '/root/apps/vagrant_1.8.6_x86_64.deb'
     state: present
+
+- shell: vagrant plugin list | grep cachier
+  register: register_plugin_cachier
+  ignore_errors: True
+  changed_when: False
+
+- name: install vagrant plugin - cachier
+  shell: vagrant plugin install vagrant-cachier
+  when: register_plugin_cachier.rc == 1

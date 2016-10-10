@@ -1,5 +1,12 @@
 ---
 
+# cause tmp dir cleaned after some time
+- name: create root app dir
+  file:
+    path: '/root/apps/'
+    state: directory
+    mode: 0755
+
 - name: 'add canonical partners repo'
   apt_repository:
     repo: 'deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner'
@@ -100,11 +107,11 @@
 #- name: download redis manager deb
 #  get_url:
 #    url: 'https://github.com/uglide/RedisDesktopManager/releases/download/0.8.3/redis-desktop-manager_0.8.3-120_amd64.deb'
-#    dest: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+#    dest: '/root/apps/redis-desktop-manager_0.8.3-120_amd64.deb'
 #
 #- name: install redis manager package
 #  apt:
-#    deb: '/tmp/redis-desktop-manager_0.8.3-120_amd64.deb'
+#    deb: '/root/apps/redis-desktop-manager_0.8.3-120_amd64.deb'
 #    state: present
 
 
@@ -114,11 +121,11 @@
 - name: download chrome deb
   get_url:
     url: 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
-    dest: '/tmp/google-chrome-stable_current_amd64.deb'
+    dest: '/root/apps/google-chrome-stable_current_amd64.deb'
 
 - name: install chrome
   apt:
-    deb: '/tmp/google-chrome-stable_current_amd64.deb'
+    deb: '/root/apps/google-chrome-stable_current_amd64.deb'
     state: present
 
 
@@ -128,13 +135,13 @@
 #- name: download dragon disk deb
 #  get_url:
 #    url: 'http://download.dragondisk.com/dragondisk_1.0.5-0ubuntu_amd64.deb'
-#    dest: '/tmp/dragondisk_1.0.5-0ubuntu_amd64.deb'
+#    dest: '/root/apps/dragondisk_1.0.5-0ubuntu_amd64.deb'
 #
 ## TODO 404 not found
 #
 #- name: install dragon disk
 #  apt:
-#    deb: '/tmp/dragondisk_1.0.5-0ubuntu_amd64.deb'
+#    deb: '/root/apps/dragondisk_1.0.5-0ubuntu_amd64.deb'
 #    state: present
 
 
@@ -155,11 +162,11 @@
 - name: download robomongo zip
   get_url:
     url: 'https://download.robomongo.org/0.9.0-rc10/linux/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz'
-    dest: '/tmp/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz'
+    dest: '/root/apps/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz'
 
 - name: "unzip robomongo"
   unarchive:
-    src: "/tmp/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz"
+    src: "/root/apps/robomongo-0.9.0-rc10-linux-x86_64-33c89ea.tar.gz"
     dest: "/opt/robomongo"
     copy: no
 

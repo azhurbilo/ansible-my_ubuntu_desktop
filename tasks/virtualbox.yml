@@ -18,11 +18,11 @@
 - name: download virtualbox ext pack
   get_url:
     url: 'http://download.virtualbox.org/virtualbox/5.1.6/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack'
-    dest: '/tmp/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack'
+    dest: '/root/apps/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack'
   register: vb_ext_result
 
 - name: install virtualbox ext pack
-  shell: 'sudo VBoxManage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack'
+  shell: 'sudo VBoxManage extpack install /root/apps/Oracle_VM_VirtualBox_Extension_Pack-5.1.6-110634.vbox-extpack'
   when: vb_ext_result.changed
 
 # faced that virtualbox 5 don't work on ubuntu 16.04
