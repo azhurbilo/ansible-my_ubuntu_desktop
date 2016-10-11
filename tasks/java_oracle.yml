@@ -12,3 +12,7 @@
     name: 'oracle-java8-installer'
     update_cache: yes
     state: latest
+
+- name: install maven
+  apt:
+    name: 'maven'
