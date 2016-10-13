@@ -97,6 +97,7 @@
     - shutter # editor
     - asciinema # terminal recorder
     - spotify-client
+    - unity-tweak-tool # to disable unity animations
 
 
 # install redis desktop manager
