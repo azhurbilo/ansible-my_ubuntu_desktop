@@ -62,3 +62,29 @@
     - 'elasticsearch:2.4.1'
     - 'mongo:3.2'
     - 'hello-world:latest'
+
+
+# Add docker compose
+
+- name: create compose dir
+  file:
+    path: /opt/docker-compose
+    state: directory
+    mode: 0755
+
+- name: download docker compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64
+    dest: /opt/docker-compose/compose
+
+- name: give permissions for compose binary
+  file:
+    path: /opt/docker-compose/docker-compose
+    state: file
+    mode: 0775
+
+- name: add compose to system path
+  copy:
+    dest: '/etc/profile.d/docker-compose.sh'
+    content: 'export PATH=/opt/docker-compose:$PATH'
+
