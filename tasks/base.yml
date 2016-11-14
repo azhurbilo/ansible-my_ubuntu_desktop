@@ -34,6 +34,10 @@
   apt_repository:
     repo: 'deb http://repository.spotify.com stable non-free'
 
+- name: add remmina repo
+  apt_repository:
+    repo: 'ppa:remmina-ppa-team/remmina-next'
+
 #- name: add chrome key
 #  apt_key:
 #    url: 'https://dl-ssl.google.com/linux/linux_signing_key.pub'
@@ -45,6 +49,9 @@
 
 - name: update apt-get
   apt: update_cache=yes
+
+# check current package version:
+# dpkg -s <package>
 
 - name: install basic packages
   apt: name={{item}} state=latest
@@ -87,6 +94,7 @@
     - fbreader # text reader
     - clementine # music player
     - remmina # RDP
+    - remmina-plugin-rdp
     - vlc # video player
     - wireshark # network sniffer
     - wavemon # wi-fi signal monitoring
