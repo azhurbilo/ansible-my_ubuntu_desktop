@@ -34,6 +34,8 @@
   apt_repository:
     repo: 'deb http://repository.spotify.com stable non-free'
 
+# latest version fix Copy-paste issue
+# Version: 1.2.0~rcgit-15+982+next+201610270632~ubuntu16.04.1
 - name: add remmina repo
   apt_repository:
     repo: 'ppa:remmina-ppa-team/remmina-next'
