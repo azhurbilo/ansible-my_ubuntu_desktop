@@ -1,5 +1,11 @@
 ---
 
+- name: create tmp apps dir
+  file:
+    path: '/root/apps'
+    state: directory
+    mode: 0755
+
 #===========
 # PACKER
 #===========
@@ -43,13 +49,12 @@
 
 - name: download terraform zip
   get_url:
-    url: 'https://releases.hashicorp.com/terraform/0.7.4/terraform_0.7.4_linux_amd64.zip'
-    dest: '/root/apps/terraform_0.7.4_linux_amd64.zip'
-    sha256sum: '8950ab77430d0ec04dc315f0d2d0433421221357b112d44aa33ed53cbf5838f6'
+    url: 'https://releases.hashicorp.com/terraform/0.7.11/terraform_0.7.11_linux_amd64.zip'
+    dest: '/root/apps/terraform_0.7.11_linux_amd64.zip'
 
 - name: unzip terraform
   unarchive:
-    src: /root/apps/terraform_0.7.4_linux_amd64.zip
+    src: /root/apps/terraform_0.7.11_linux_amd64.zip
     dest: /opt/terraform
 
 #===========
