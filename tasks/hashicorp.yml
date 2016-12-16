@@ -23,13 +23,12 @@
 
 - name: download packer zip
   get_url:
-    url: 'https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip'
-    dest: '/root/apps/packer_0.10.2_linux_amd64.zip'
-    sha256sum: '86c78bae6bd09afb4ddb86915cb71a22fb81ea79578bbf65de3ef48c842d9b2b'
+    url: 'https://releases.hashicorp.com/packer/0.12.1/packer_0.12.1_linux_amd64.zip'
+    dest: '/root/apps/packer_0.12.1_linux_amd64.zip'
 
 - name: packer unzip
   unarchive:
-    src: /root/apps/packer_0.10.2_linux_amd64.zip
+    src: /root/apps/packer_0.12.1_linux_amd64.zip
     dest: /opt/packer
 
 #===========
