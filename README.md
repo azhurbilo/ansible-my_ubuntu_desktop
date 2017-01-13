@@ -52,6 +52,10 @@ File `playbook.yml` contains an example of how to use this role
     - ansible-my_ubuntu_desktop
 ```
 
+```
+sudo ansible-playbook -i local-inventory playbook.yml
+```
+
 License
 -------
 
