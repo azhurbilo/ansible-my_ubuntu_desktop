@@ -5,3 +5,9 @@
   service:
     name: network-manager
     state: restarted
+
+- name: restart docker
+  systemd:
+    name: docker
+    state: restarted
+    daemon_reload: yes

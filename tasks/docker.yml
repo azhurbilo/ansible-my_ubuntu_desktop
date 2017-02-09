@@ -20,28 +20,22 @@
 
 - name: install latest docker package
   apt:
-    name: 'docker-engine'
+    name: 'docker-engine=1.13.*'
     update_cache: yes
-    state: latest
+    state: 'present'
 
-# check what file generated with systemd
-#
-#- name: set docker daemon options
-#  copy:
-#    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
-#    dest: /etc/default/docker
-#    owner: root
-#    group: root
-#    mode: 0644
-#  notify:
-#    - Reload docker
-#  when: docker_opts != ""
-
+- name: configure dockerd options
+  lineinfile:
+    destfile: '/lib/systemd/system/docker.service'
+    regexp: '^ExecStart='
+    line: 'ExecStart=/usr/bin/dockerd -H fd:// --storage-driver=overlay'
+  notify: 'restart docker'
 
 - name: start docker service
-  service:
-    name: docker
+  systemd:
     state: started
+    name: docker
+    daemon_reload: yes
 
 - name: add users to the docker group
   user:
@@ -57,10 +51,10 @@
   changed_when: "'Image is up to date' not in register_docker_frontend_image_status.stdout"
   with_items:
     - 'jekyll/jekyll:3.2.1'
-    - 'centos:centos7.2.1511'
+    - 'centos:centos7.3.1611'
     - 'cgswong/aws:latest'
     - 'elasticsearch:2.4.1'
-    - 'mongo:3.2'
+    - 'mongo:3.4.2'
     - 'hello-world:latest'
 
 
@@ -72,9 +66,10 @@
     state: directory
     mode: 0755
 
+# 1.11.0 use v3 specification for working with docker-engine >= 1.13
 - name: download docker compose
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.11.0/docker-compose-Linux-x86_64
     dest: /opt/docker-compose/compose
 
 - name: give permissions for compose binary
